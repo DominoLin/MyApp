@@ -6,4 +6,11 @@
     <string name="birth_tv4">1949-2019</string>
     <string name="birth_iv">70</string>
     <string name="birth_tv5">From 肖林</string>
+    <string name="score_plus1">+1 point</string>
+    <string name="score_plus2">+2 points</string>
+    <string name="score_plus3">+3 points</string>
+    <string name="score_teamA">teamA</string>
+    <string name="score_teamB">teamB</string>
+    <string name="all_0">0</string>
+    <string name="all_reset">reset</string>
 </resources>
