@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyApp</string>
+    <string name="birth_tv1">盛世华诞</string>
+    <string name="birth_tv2">振兴中华</string>
+    <string name="birth_tv3">周年</string>
+    <string name="birth_tv4">1949-2019</string>
+    <string name="birth_iv">70</string>
+    <string name="birth_tv5">From 肖林</string>
 </resources>
