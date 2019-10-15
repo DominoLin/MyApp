@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ExchangeActivity">
+
+    <EditText
+        android:id="@+id/ed_exInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="@string/ex_input"
+        android:inputType="number|numberDecimal"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tv_exShow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="20sp"
+        android:text="@string/all_hello" />
+
+    <Button
+        android:id="@+id/btn_dollar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:onClick="dollar"
+        android:text="@string/btn_dollar" />
+
+    <Button
+        android:id="@+id/btn_euro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:onClick="euro"
+        android:text="@string/btn_euro" />
+
+    <Button
+        android:id="@+id/btn_won"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:onClick="won"
+        android:text="@string/btn_won" />
+
+    <Button
+        android:id="@+id/btn_exConfig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:onClick="config"
+        android:text="@string/all_config" />
+
+</LinearLayout>

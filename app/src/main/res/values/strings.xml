@@ -13,4 +13,13 @@
     <string name="score_teamB">teamB</string>
     <string name="all_0">0</string>
     <string name="all_reset">reset</string>
+    <string name="ex_input">input RMB</string>
+    <string name="all_hello">hello</string>
+    <string name="btn_dollar">dollar</string>
+    <string name="btn_euro">euro</string>
+    <string name="btn_won">won</string>
+    <string name="all_config">config</string>
+    <string name="all_save">save</string>
+    <string name="menu_item1">check rates</string>
+    <string name="menu_item2">myList</string>
 </resources>

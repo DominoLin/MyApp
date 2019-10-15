@@ -16,6 +16,22 @@ public class ScoreActivity extends AppCompatActivity {
         showA = findViewById(R.id.tv_showA);
         showB = findViewById(R.id.tv_showB);
     }
+    public void onSaveInstanceState(Bundle outBundle) {
+        super.onSaveInstanceState(outBundle);
+        String score1 = showA.getText().toString();
+        String score2 = showB.getText().toString();
+
+        outBundle.putString("score1",score1);
+        outBundle.putString("score2",score2);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+
+        showA.setText(savedInstanceState.getString("score1"));
+        showB.setText(savedInstanceState.getString("score2"));
+    }
+
     public void add1(View view){
         if(view.getId()==R.id.btn_teamA1) {
             addA(1);
@@ -50,6 +66,7 @@ public class ScoreActivity extends AppCompatActivity {
         int temp = Integer.parseInt(scoreA)+i;
         showA.setText(Integer.toString(temp));
     }
+
     public void addB(int i){
         scoreB = showB.getText().toString();
         int temp = Integer.parseInt(scoreB)+i;
