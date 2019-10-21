@@ -45,13 +45,15 @@ public class CalculationActivity extends AppCompatActivity implements TextWatche
     @Override
     public void afterTextChanged(Editable editable) {
         if(editable!=null) {
-            float before = Float.parseFloat(editText.getText().toString());
-            float r = Float.parseFloat(rate);
-            float after = before*r;
-            Log.i(TAG, "afterTextChanged: "+before);
-            Log.i(TAG, "afterTextChanged: "+r);
-            Log.i(TAG, "afterTextChanged: "+after);
-            showView.setText(String.format("%.4f", after));
+            if (!editable.toString().equals("") ) {
+                float before = Float.parseFloat(editText.getText().toString());
+                float r = Float.parseFloat(rate);
+                float after = before * r;
+                Log.i(TAG, "afterTextChanged: " + before);
+                Log.i(TAG, "afterTextChanged: " + r);
+                Log.i(TAG, "afterTextChanged: " + after);
+                showView.setText(String.format("%.4f", after));
+            }
         }
     }
 }

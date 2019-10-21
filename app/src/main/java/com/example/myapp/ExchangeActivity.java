@@ -26,8 +26,10 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ExchangeActivity extends AppCompatActivity implements Runnable{
     private static final String TAG = "Exchange";
@@ -188,6 +190,7 @@ public class ExchangeActivity extends AppCompatActivity implements Runnable{
     public void run() {
         Log.i(TAG, "run: 子线程从网络获取汇率");
         Bundle bundle = new Bundle();
+        List<RateItem> rateList = new ArrayList<RateItem>();
 
         String url="http://www.usd-cny.com/bankofchina.htm";
         try {
@@ -201,6 +204,7 @@ public class ExchangeActivity extends AppCompatActivity implements Runnable{
                 String str1 = td1.text();
                 String val = td2.text();
                 float v = 100f/Float.parseFloat(val);
+                rateList.add(new RateItem(str1, String.valueOf(v)));
                 if(str1.equals("欧元")){
                     bundle.putFloat("euro_net",v);
                     Log.i(TAG, "run: "+str1+":"+v);
@@ -210,13 +214,18 @@ public class ExchangeActivity extends AppCompatActivity implements Runnable{
                 }else if(str1.equals("美元")){
                     bundle.putFloat("dollar_net",v);
                     Log.i(TAG, "run: "+str1+":"+v);
-                }else
-                    continue;
+                }
             }
+            //将数据写入数据库
+            RateManager manager = new RateManager(this);
+            manager.deleteAll();
+            manager.addAll(rateList);
 
         } catch (IOException e){
             e.printStackTrace();
         }
+
+
         Message msg = handler.obtainMessage(1);
         msg.obj = bundle;
         handler.sendMessage(msg);

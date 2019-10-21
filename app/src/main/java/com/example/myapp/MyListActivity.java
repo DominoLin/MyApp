@@ -3,7 +3,9 @@ package com.example.myapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +13,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 
@@ -23,12 +26,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyListActivity extends ListActivity implements Runnable, AdapterView.OnItemClickListener {
+public class MyListActivity extends ListActivity implements Runnable, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private static final String TAG = "myList";
     Handler handler;
     ArrayList<HashMap<String ,String>>list_data;
 
+    ListAdapter adapter;
+    MyAdapter myAdapter;
+    ArrayList<HashMap<String,String>> list_item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +45,43 @@ public class MyListActivity extends ListActivity implements Runnable, AdapterVie
             @Override
             public void handleMessage(@NonNull Message msg) {
                 if (msg.what == 3) {
-                    ArrayList<HashMap<String,String>> list_item = (ArrayList<HashMap<String,String>>) msg.obj;
-                    ListAdapter adapter = new SimpleAdapter(MyListActivity.this,
-                            list_item,
-                            R.layout.activity_my_list,
-                            new String[]{"Name", "Rate"},
-                            new int[]{R.id.tv_mylist1, R.id.tv_mylist2}
-                    );
-                    setListAdapter(adapter);
-//                    MyAdapter myAdapter = new MyAdapter(MyListActivity.this, R.layout.activity_my_list, list_item);
-//                    setListAdapter(myAdapter);
+                    list_item = (ArrayList<HashMap<String,String>>) msg.obj;
+//                    adapter = new SimpleAdapter(MyListActivity.this,
+//                            list_item,
+//                            R.layout.activity_my_list,
+//                            new String[]{"Name", "Rate"},
+//                            new int[]{R.id.tv_mylist1, R.id.tv_mylist2}
+//                    );
+//                    setListAdapter(adapter);
+
+                    myAdapter = new MyAdapter(MyListActivity.this, R.layout.activity_my_list, list_item);
+                    setListAdapter(myAdapter);
+
                     getListView().setOnItemClickListener(MyListActivity.this);
                 }
                 super.handleMessage(msg);
             }
         };
+//        getListView().setEmptyView(findViewById(R.id.tv_nodata));
+        getListView().setOnItemClickListener(this);
+        getListView().setOnItemLongClickListener(this);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示")
+                .setMessage("是否要删除当前数据")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        Log.i(TAG, "onClick: 对话框事件处理");
+                        list_item.remove(position);
+                        myAdapter.notifyDataSetChanged();
+                    }
+                }).setNegativeButton("否",null);
+        builder.create().show();
+        return true;
     }
 
     @Override
@@ -101,4 +129,6 @@ public class MyListActivity extends ListActivity implements Runnable, AdapterVie
         msg.obj = list_data;
         handler.sendMessage(msg);
     }
+
+
 }
