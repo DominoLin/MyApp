@@ -23,4 +23,7 @@
     <string name="menu_item1">check rates</string>
     <string name="menu_item2">myList</string>
     <string name="all_nodata">No Data</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
